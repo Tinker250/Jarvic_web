@@ -13,7 +13,7 @@ from wechatpy.replies import TextReply, ImageReply, VoiceReply, MusicReply
 from flask import Flask, redirect, render_template, request, url_for
 # import eventlet
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 openai.api_base = "https://drdamien.com/v1"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 wx_token = os.getenv("WX_TOKEN")
@@ -28,7 +28,7 @@ expire_time = 0
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('single-chat.html')
 
 @app.route("/receiveMsg", methods=["GET", "POST"])
 def receiveMsg():
@@ -125,6 +125,11 @@ def stream_return():
 
     # result = request.args.get("result")
     # return render_template("index.html", result=result)
+
+
+@app.route("/singleChat", methods=("GET", "POST"))
+def botchat():
+    return render_template('single-chat.html')
 
 @socketio.on('connect')
 def handle_connect():
