@@ -1,0 +1,9 @@
+Flask
+openai
+Requests
+wechatpy
+jinja2
+pycryptodome
+simple-websocket
+flask_socketio
+python-dotenv
