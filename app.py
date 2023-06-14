@@ -15,7 +15,7 @@ from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__, static_folder='static')
 openai.api_base = "https://drdamien.com/v1"
-openai.api_key = "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"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 wx_token = os.getenv("WX_TOKEN")
 wx_app_id = os.getenv("WX_APP_ID")
 wx_secret_key = os.getenv("WX_SECRET_KEY")
