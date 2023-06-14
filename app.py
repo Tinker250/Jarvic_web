@@ -11,11 +11,13 @@ from flask_socketio import SocketIO, send, emit
 from wechatpy import parse_message
 from wechatpy.replies import TextReply, ImageReply, VoiceReply, MusicReply
 from flask import Flask, redirect, render_template, request, url_for
+from controllers.ChatGPT import get_api_key
 # import eventlet
 
 app = Flask(__name__, static_folder='static')
 openai.api_base = "https://drdamien.com/v1"
-openai.api_key = "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"
+key = get_api_key()
+openai.api_key = key[0]
 wx_token = os.getenv("WX_TOKEN")
 wx_app_id = os.getenv("WX_APP_ID")
 wx_secret_key = os.getenv("WX_SECRET_KEY")
