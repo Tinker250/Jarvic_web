@@ -3,9 +3,6 @@ import os
 import threading
 from DB.ChatGPT import GPTProcessor
 
-openai.api_base = "https://drdamien.com/v1"
-openai.api_key = wx_token = "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"
-
 def get_gpt_result(request_id,user_input):
     def t_post(t_request_id,t_user_input):
         response = openai.ChatCompletion.create(

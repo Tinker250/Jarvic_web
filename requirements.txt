@@ -7,3 +7,4 @@ pycryptodome
 simple-websocket
 flask_socketio
 python-dotenv
+pymysql
