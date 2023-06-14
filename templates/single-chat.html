@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no, shrink-to-fit=no">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
 <title>Jarvic智能助手</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -1240,14 +1240,14 @@
                                     <input type="text" id="inputText" class="form-control border-0 pl-0"
                                         placeholder="请输入文字">
 
-                                    <a  href="/" class="input-group-append d-none d-sm-block">
+                                    <a  href="/" class="input-group-append">
                                         <span class="input-group-text border-0">
                                             <button class="btn btn-sm btn-link text-muted" data-toggle="tooltip"
                                                 title="新的对话" type="button"><i
                                                     class="zmdi zmdi-refresh font-22"></i></button>
                                         </span>
                                     </a>
-                                    <div class="input-group-append">
+                                    <!-- <div class="input-group-append">
                                         <span class="input-group-text border-0">
                                             <button class="btn btn-sm btn-link text-muted" data-toggle="tooltip"
                                                 title="Smaily" type="button"><i
@@ -1260,13 +1260,13 @@
                                                 title="Attachment" type="button"><i
                                                     class="zmdi zmdi-attachment font-22"></i></button>
                                         </span>
-                                    </div>
+                                    </div> -->
 
                                     <div class="input-group-append">
                                         <span class="input-group-text border-0 pr-0">
                                             <button type="submit" id="submitBtn" class="btn btn-primary">
                                                 <span class="d-none d-md-inline-block me-2">Send</span>
-                                                <i class="zmdi zmdi-mail-send"></i>
+                                                <div class="wave"><i class="zmdi zmdi-mail-send"></i></div>
                                             </button>
                                         </span>
                                     </div>
@@ -1687,6 +1687,12 @@
         console.log(user_input_text)
         user_input.value ="";
         const chat_body = $("#chatBody")
+        if(user_input_text == ""){
+            const empty_alert = '<li class="d-flex message divider mt-xl-5 mt-md-3 mb-xl-5 mb-md-3" style="position:static;">请输入文字！</li>'
+            chat_body.append(empty_alert)
+            return
+        }
+        $(this).attr("disabled","true");
         //先放一个东西输入后面的内容
         var user_intput_html = '<li class="d-flex message right"> \
                                 <div class="message-body"> \
@@ -1747,9 +1753,11 @@
         },
         body: JSON.stringify({ query: history }),
       };
+      is_start_code = true
       // console.log()
       fetch('/askMe', requestOptions)
         .then(response => {
+        $("#submitBtn").removeAttr("disabled");
           const reader = response.body.getReader();
           const paragraph = $("#response"+id_count)
           paragraph.empty()
