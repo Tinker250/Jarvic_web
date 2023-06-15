@@ -1,6 +1,7 @@
 import pymysql
 import uuid
 import re
+import os
 
 db_host = os.getenv("DB_HOST")
 db_psw = os.getenv("DB_PSW")
