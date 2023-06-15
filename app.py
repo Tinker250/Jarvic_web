@@ -14,8 +14,13 @@ from flask import Flask, redirect, render_template, request, url_for
 # import eventlet
 
 app = Flask(__name__, static_folder='static')
+<<<<<<< HEAD
 # openai.api_base = "https://drdamien.com/v1"
 openai.api_key = os.getenv("OPENAI_API_KEY")
+=======
+openai.api_base = "https://drdamien.com/v1"
+openai.api_key = "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"
+>>>>>>> 7e0212242ad5bacd16c7c8d4692eb6f337c7ac49
 wx_token = os.getenv("WX_TOKEN")
 wx_app_id = os.getenv("WX_APP_ID")
 wx_secret_key = os.getenv("WX_SECRET_KEY")
