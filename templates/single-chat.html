@@ -1724,7 +1724,7 @@
         $('.message-content').each(function () {
             id_count += 1
             if(is_bot){
-                history +=$(this).text().trim()+'\n'
+                history +="Jarvic: "+$(this).text().trim()+'\n'
                 is_bot = false
             }else{
                 history +="Human: "+$(this).text().trim()+'\n'

@@ -102,6 +102,8 @@ def stream_return():
         print(request)
         print(request.json)
         user_input = request.json.get("query")
+        if(len(user_input)>512):
+            user_input = user_input[-512:]
     def askMe(user_input):
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo-0301",

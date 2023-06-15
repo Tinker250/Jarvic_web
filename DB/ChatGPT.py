@@ -4,7 +4,7 @@ import re
 
 class GPTProcessor():
     def __init__(self):
-        self.conn = pymysql.connect(host='10.22.112.147',port=3306,user='root',password='P@yC0ll3ctive',db='Jarvic',charset="utf8")
+        self.conn = pymysql.connect(host='127.0.0.1',port=3306,user='root',password='P@yC0ll3ctive',db='Jarvic',charset="utf8")
     
     def add_result_row(self,query):
         cursor = self.conn.cursor()
