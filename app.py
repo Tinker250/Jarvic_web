@@ -15,8 +15,9 @@ from controllers.ChatGPT import get_api_key
 # import eventlet
 
 app = Flask(__name__, static_folder='static')
-openai.api_base = "https://drdamien.com/v1"
+# openai.api_base = "https://drdamien.com/v1"
 key = get_api_key()
+print(key)
 openai.api_key = key[0]
 wx_token = os.getenv("WX_TOKEN")
 wx_app_id = os.getenv("WX_APP_ID")
@@ -105,24 +106,25 @@ def stream_return():
         if(len(user_input)>512):
             user_input = user_input[-512:]
     def askMe(user_input):
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-0301",
-                messages=[{"role": "user", "content": user_input}],
-                temperature=0,
-                stream=True,
-            )
-            answer = ""
-            out = ""
-            for event in response: 
-                # STREAM THE ANSWER
-                print(answer, end='', flush=True) # Print the response
-                # RETRIEVE THE TEXT FROM THE RESPONSE
-                # event_time = time.time() - start_time  # CALCULATE TIME DELAY BY THE EVENT
-                event_text = event['choices'][0]['delta'] # EVENT DELTA RESPONSE
-                answer = event_text.get('content', '') # RETRIEVE CONTENT
-                yield answer
-                out += answer
-                time.sleep(0.01)
+        print(user_input)
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo-0301",
+            messages=[{"role": "user", "content": user_input}],
+            temperature=0,
+            stream=True,
+        )
+        answer = ""
+        out = ""
+        for event in response: 
+            # STREAM THE ANSWER
+            print(answer, end='', flush=True) # Print the response
+            # RETRIEVE THE TEXT FROM THE RESPONSE
+            # event_time = time.time() - start_time  # CALCULATE TIME DELAY BY THE EVENT
+            event_text = event['choices'][0]['delta'] # EVENT DELTA RESPONSE
+            answer = event_text.get('content', '') # RETRIEVE CONTENT
+            yield answer
+            out += answer
+            time.sleep(0.01)
 
     return Response(askMe(user_input), mimetype='text/plain')
         # return response.choices[0].message.content
